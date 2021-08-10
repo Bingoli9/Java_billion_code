@@ -1,0 +1,55 @@
+group 'com.yanqun'
+version '1.0'
+apply plugin: 'java'
+apply plugin: 'com.google.protobuf'
+
+//jdk版本
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+//指定maven中央仓库（gradle仍然使用maven库进行依赖的构建）
+repositories {
+    mavenCentral()
+    /*如果连接mavenCentral()时网络不稳定，可以将mavenCentral()改为国内的maven镜像地址：
+       maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    */
+}
+dependencies {
+    compile 'io.netty:netty-all:4.1.28.Final' //上一步中，在maven库中复制的netty依赖坐标
+    compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.5.1'
+    compile group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.5.1'
+    // https://mvnrepository.com/artifact/org.apache.thrift/libthrift
+    compile group: 'org.apache.thrift', name: 'libthrift', version: '0.11.0'
+    compile group: 'io.grpc', name: 'grpc-netty', version: '1.15.0'
+    compile group: 'io.grpc', name: 'grpc-protobuf', version: '1.15.0'
+    compile group: 'io.grpc', name: 'grpc-stub', version: '1.15.0'
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.5'
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.5.1-1"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.15.0'
+        }
+    }
+    //指定生成文件的BaseDir是src
+    generateProtoTasks.generatedFilesBaseDir = "src"
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {
+                //指定将生成的文件放入src中的java目录
+                setOutputSubDir 'java'
+            }
+        }
+    }
+}

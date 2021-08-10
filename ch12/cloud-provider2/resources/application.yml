@@ -1,0 +1,42 @@
+server:
+  port: 8882
+  
+mybatis:
+  #mybatis配置文件所在路径
+  config-location: classpath:mybatis/mybatis.xml       
+  #为所有POJO设置别名
+  type-aliases-package: com.yanqun.cloud.entity
+  #指定mapper映射文件所在路径
+  mapper-locations:
+  - classpath:mybatis/mapper/**/*.xml                      
+    
+spring:
+   #设置服务名
+   application:
+      name: cloud-provider
+   datasource:
+      driver-class-name: org.gjt.mm.mysql.Driver     
+      url: jdbc:mysql://localhost:3306/cloud2            
+      username: root
+      password: root
+      
+eureka:
+  #cloud-provider是“服务生产者”，但对eureka来说需要将cloud-provider注册到eureka中，因此在eureka来看cloud-provider是一个client
+  client: 
+    service-url: 
+      #将当前项目（cloud-provider），注册到eureka的服务注册地址中
+       defaultZone: http://yanqun:10001/eureka/,http://yanqun2:10002/eureka/,http://yanqun3:10003/eureka/
+  #配置本服务在eureka中的id值（默认名是“ip:服务名:8888，如localhost:cloud-provider:8888”）
+  instance:
+    instance-id: YanqunCloudProvider2
+    
+
+info: 
+  author: yanqun
+  #通过parent工程pom.xml中maven-resources-plugin设置的$，获取本项目的maven坐标
+  project.groupId: $project.groupId
+  project.artifactId: $project.artifactId
+  project.version: $project.version
+  #通过SpEL${}动态获取本yaml中的属性值
+  eureka.client.service-url.defaultZone: ${eureka.client.service-url.defaultZone}
+    

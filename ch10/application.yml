@@ -1,0 +1,49 @@
+#主配置
+server:
+  port: 8888
+#指定使用test环境
+#spring:
+#  profiles: 
+ #   active: test
+---
+#开发环境配置
+#server:
+#  port: 7777
+#spring:
+#  profiles: dev
+---
+#测试环境配置
+server:
+  port: 9999
+spring:
+  profiles: test
+  
+http:
+  maxTotal: 200
+  defaultMaxPerRoute: 50 
+  connectTimeout: 3000
+  connectionRequestTimeout: 100
+  socketTimeout: 20000
+  
+student:
+  someone: YanQun
+#  name: ${student.someone:颜群}
+  name: ${random.value}
+  #age: 29
+  sex: true
+  birthday: 2019/02/12
+  location: {province: 陕\n西,city: '西\n安',zone: "莲湖\n区"}
+      #province: 陕西
+      #city: 西安
+      #zone: 莲湖区
+  hobbies: [足球,篮球]
+    # - 足球
+   # - 篮球
+  skills: 编程,金融
+   # - 编程
+    # - 金融
+  #pet: {nickName: wc,strain: hsq}
+  pet: {nick-name: "${random.uuid}",strain: hsq}
+   # nickName: wc555
+   # strain: hsq
+  email: 157468995@qq.com

@@ -1,0 +1,25 @@
+server: 
+  port: 20202
+
+spring: 
+  application:
+    name: cloud-zuul
+    
+zuul: 
+  #路由访问前缀
+  prefix: /yq
+  #屏蔽用原名访问任何服务
+  ignored-services: "*"
+  #屏蔽用原来的“cloud-provider”访问服务
+  #ignored-services: cloud-provider
+  routes: 
+    mydept.serviceId: cloud-provider
+    mydept.path: /zuulProxy/** 
+ 
+eureka: 
+  client: 
+    service-url: 
+      #将zuul注入到eureka集群中
+      defaultZone: http://yanqun:10001/eureka/,http://yanqun2:10002/eureka/,http://yanqun3:10003/eureka/
+  instance:
+    hostname: yqzuul 

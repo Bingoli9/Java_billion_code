@@ -1,0 +1,12 @@
+syntax = "proto2" ;
+package com.yanqun.protobuf ;
+option optimize_for = SPEED ;
+option java_package = "com.yanqun.protobuf.diff" ;
+option java_outer_classname = "StudentMessage" ;
+message Student
+{
+    required string name = 1 ;
+    optional int32 age = 2 ;
+}
+
+

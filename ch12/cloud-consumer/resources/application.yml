@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Sleuth
+
+server:
+  port: 7777
+eureka:
+  client:
+    register-with-eureka: false
+    service-url: 
+      defaultZone: http://yanqun:10001/eureka/,http://yanqun2:10002/eureka/,http://yanqun3:10003/eureka/

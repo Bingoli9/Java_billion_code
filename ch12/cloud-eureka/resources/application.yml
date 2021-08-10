@@ -1,0 +1,15 @@
+server: 
+  port: 10001
+eureka: 
+  #server: 
+    #enable-self-preservation: false 
+  instance:
+    #eureka注册中心名
+    hostname: yanqun 
+  client: 
+    #是否注册到eureka中（本服务就是eureka）；如果是单机eureka，值为false;如果是集群eureka，值为true
+    register-with-eureka: true    
+    fetch-registry: true   
+    service-url: 
+      #向eureka中注册服务的地址，即http://yanqun:10001/eureka
+      defaultZone: http://yanqun2:10002/eureka/,http://yanqun3:10003/eureka/

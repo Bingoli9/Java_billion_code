@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script type="text/javascript">
+            var webSocket = new WebSocket("ws://localhost:8888/myWebSocket");
+            //检测WebSocket服务端是否开启
+            webSocket.onopen= function(event){
+                document.getElementById("tip").innerText = "连接开启" ;
+            }
+             //检测WebSocket服务端是否关闭
+            webSocket.onclose= function(event){
+                document.getElementById("tip").innerText = "连接关闭" ;
+            }
+            //接收WebSocket服务端发送来的数据（数据保存在event对象中）
+            webSocket.onmessage = function(event){
+                document.getElementById("tip").innerText = "接收到的服务端消息："+ event.data ;
+            }
+            function sendMessage(msg){
+                if(webSocket.readyState == WebSocket.OPEN){
+                    //向WebSocket服务端发送数据
+                    webSocket.send(msg) ;
+                }
+            }
+        </script>
+    </head>
+
+    <body onload="init()">
+        <form>
+            <textarea name="message"></textarea> <br/>
+            <input type="button" onclick="sendMessage(this.form.message.value)"  value="向服务端发送WebSocket数据"/>
+        </form>
+        <div id="tip"></div>
+    </body>
+</html>

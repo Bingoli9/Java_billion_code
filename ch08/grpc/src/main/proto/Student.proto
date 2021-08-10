@@ -1,0 +1,56 @@
+syntax = "proto3";
+package com.yanqun.grpc.proto;
+option java_package = "com.yanqun.grpc.proto";
+option java_outer_classname = "StudentData";
+option java_multiple_files = true ;
+//定义接口
+service StudentService{
+    //请求一个Requset对象，响应一个Response对象
+    rpc queryStudentNameById(MyRequestId) returns(MyResponseName) {}
+    //请求一个Requset对象，响应一个Stream
+    rpc queryStudentsByCourseName(MyRequestCourseName) returns(stream MyResponseStudentsStream) {}
+    //请求一个Stream，响应一个StreamObserver类型的Response对象
+    rpc queryStudentsByCourseName2(stream MyRequestCourseName) returns(MyResponseStudents) {}
+    //请求一个Stream，响应一个Stream
+    rpc queryStudentNameById2(stream MyRequestId) returns(stream MyResponseName) {}
+}
+
+message MyRequestId
+{
+    int32 id = 1 ;
+}
+
+message MyResponseName
+{
+    string name = 1 ;
+}
+
+message MyStudent
+{
+    int32 id = 1 ;
+    string name = 2;
+    string courseName = 3 ;
+}
+
+message MyResponseStudents
+{
+    //服务端的响应结果是集合类型，因此需要加上repeated
+    repeated MyStudent students = 1 ;
+}
+
+
+//数据结构,定义请求的Request对象
+message MyRequestCourseName
+{
+    string courseName = 1 ;
+}
+//数据结构,定义响应的Stream
+message MyResponseStudentsStream
+{
+    int32 id = 1 ;
+    string name = 2;
+    string courseName = 3 ;
+}
+
+
+

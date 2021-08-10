@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanqun.demo.mapper.StudentMapper">
+	<!-- 增 -->
+	<insert id="addStudent" parameterType="com.yanqun.entity.Student">
+			insert into student values(#{stuno},#{stuname},#{gradeid})
+	</insert>
+	<!-- 删 -->
+	<insert id="deleteStudentByStuno" parameterType="int" >
+			delete from student where stuno = #{stuno}
+	</insert>
+	<!-- 改 -->
+	<update id="updateStudentByStuno" parameterType="com.yanqun.entity.Student">
+			update student set stuname=#{stuname},gradeid=#{gradeid} where stuno = #{stuno}
+	</update>
+	<!-- 查 -->
+	<select id="queryStudents" resultType="com.yanqun.entity.Student" > 
+		  select * from student
+	</select> 
+</mapper>

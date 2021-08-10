@@ -1,0 +1,32 @@
+syntax = "proto2" ;
+package com.yanqun.protobuf.diff ;
+option optimize_for = SPEED ;
+option java_package = "com.yanqun.protobuf.diff" ;
+option java_outer_classname = "MyMessage" ;
+
+message MessageData
+{
+    enum MessageType{
+        PersonType = 1 ;
+        DogType = 2 ;
+    }
+
+    required MessageType Message_Type = 1 ;
+
+    oneof messageContent{
+      PersonData person = 2 ;
+      DogData dog = 3 ;
+    }
+}
+
+message PersonData{
+    optional string pname = 1 ;
+    optional int32 page = 2 ;
+}
+message DogData{
+    optional string dname = 1 ;
+    optional string dcolor = 2 ;
+}
+
+
+

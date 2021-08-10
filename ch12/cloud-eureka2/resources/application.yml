@@ -1,0 +1,12 @@
+server: 
+  port: 10002
+eureka: 
+  instance:
+    hostname: yanqun2 
+  client: 
+   #是否注册到eureka中（本服务就是eureka）；如果是单机eureka，值为false;如果是集群eureka，值为true
+    register-with-eureka: true    
+    fetch-registry: true 
+    service-url: 
+      #在eureka集群环境中，defaultZone用于指定其他eureka节点，表示将当前eureka中注册的服务也同时注册到其他eureka节点上
+      defaultZone: http://yanqun:10001/eureka/,http://yanqun3:10003/eureka/

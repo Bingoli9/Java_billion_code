@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanqun.cloud.dao.StudentDao">
+	<!--增 -->
+	<insert id="addStudent" parameterType="student">
+		insert into student(stuname,db) VALUES(#{stuname},database()) 
+	</insert>
+	<!--删 -->
+	<delete id="deleteStudentBystuno" parameterType="int">
+		delete from student where stuno =#{stuno}
+	</delete>
+	<!--改 -->
+	<update id="updateStudentBystuno" parameterType="student">
+		update student set stuName=#{stuname},db=database() where stuno=${stuno}
+	</update>
+	<!--查 -->
+	<select id="queryAllStudents" resultType="student">
+		select * from student
+	</select>
+</mapper>
+ 
+

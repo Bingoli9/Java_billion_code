@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!-- 引入thymeleaf命名空间 -->
+<html xmlns:th="http://www.thymeleaf.org"> 
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<p id="pid" class="pclass"  th:id="${pidValue}" th:class="${pclassValue}"  th:text="${ptextValue}">welcome to thymeleaf....</p>
+		<!--
+		<div th:each="prod : ${prods}">
+			<span th:text="${prod.name}"></span>
+			<span th:text="${prod.price}"></span>
+			<hr/>
+		</div>
+		
+		-->
+
+	</body>
+</html>
